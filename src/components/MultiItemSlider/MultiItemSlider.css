@@ -1,0 +1,44 @@
+/* src/components/MultiItemSlider/MultiItemSlider.css */
+.multi-slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden;
+  }
+  
+  .multi-slider {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .multi-slider-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .multi-slide {
+    flex: 0 0 calc(100% / 3); /* 3 imágenes visibles */
+    padding: 10px;
+  }
+  
+  .multi-slide img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .slider-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+  
+  .slider-btn:hover {
+    background-color: #555;
+  }
+  

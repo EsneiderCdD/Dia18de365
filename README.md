@@ -321,3 +321,164 @@ Esta clase introdujo el **auto-reproducción** con `setInterval`, la **pausa con
 ---
 
 ¡Listo para la siguiente clase! 🎉
+
+
+
+
+
+
+
+
+# 📚 Clase 4: Slider con Múltiples Elementos Visibles
+
+## 🎯 Objetivo de esta clase
+En esta clase, mejoramos el slider para que pueda mostrar **varias imágenes al mismo tiempo** en lugar de solo una. Esto es útil para carruseles de **productos, testimonios o galerías de imágenes** como los que vemos en Amazon, Netflix o tiendas en línea.
+
+## 📌 Conceptos clave aprendidos
+1. **Mostrar múltiples elementos en pantalla simultáneamente**.
+2. **Controlar cuántos elementos se ven a la vez** (en este caso, 3).
+3. **Evitar que el slider avance cuando ya no hay más elementos disponibles**.
+4. **Mejorar la lógica del desplazamiento del slider**.
+
+---
+
+## 🛠 Estructura del slider múltiple
+```bash
+📂 src
+ ┣ 📂 components
+ ┃ ┗ 📂 MultiItemSlider
+ ┃   ┣ 📜 MultiItemSlider.jsx
+ ┃   ┗ 📜 MultiItemSlider.css
+ ┣ 📂 assets
+ ┃ ┗ 📜 images.js   # Aquí guardamos un array de imágenes
+```
+
+---
+
+## 🔹 1️⃣ Array de imágenes (`src/assets/images.js`)
+```javascript
+export const images = [
+  { url: "https://source.unsplash.com/300x200/?nature", alt: "Naturaleza" },
+  { url: "https://source.unsplash.com/300x200/?city", alt: "Ciudad" },
+  { url: "https://source.unsplash.com/300x200/?ocean", alt: "Océano" },
+  { url: "https://source.unsplash.com/300x200/?mountain", alt: "Montaña" },
+  { url: "https://source.unsplash.com/300x200/?forest", alt: "Bosque" },
+  { url: "https://source.unsplash.com/300x200/?sunset", alt: "Atardecer" }
+];
+```
+
+---
+
+## 🔹 2️⃣ Componente `MultiItemSlider.jsx`
+```javascript
+import { useState } from "react";
+import { images } from "../../assets/images";
+import "./MultiItemSlider.css";
+
+const ITEMS_VISIBLE = 3; // Número de imágenes visibles al mismo tiempo
+
+export default function MultiItemSlider() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    if (currentIndex < images.length - ITEMS_VISIBLE) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  return (
+    <div className="multi-slider-container">
+      <button onClick={prevSlide} className="slider-btn">◀</button>
+      <div className="multi-slider">
+        <div
+          className="multi-slider-track"
+          style={{ transform: `translateX(-${currentIndex * (100 / ITEMS_VISIBLE)}%)` }}
+        >
+          {images.map((image, index) => (
+            <div className="multi-slide" key={index}>
+              <img src={image.url} alt={image.alt} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <button onClick={nextSlide} className="slider-btn">▶</button>
+    </div>
+  );
+}
+```
+
+---
+
+## 🔹 3️⃣ Estilos en `MultiItemSlider.css`
+```css
+.multi-slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  max-width: 800px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.multi-slider {
+  width: 100%;
+  overflow: hidden;
+}
+
+.multi-slider-track {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.multi-slide {
+  flex: 0 0 calc(100% / 3); /* 3 imágenes visibles */
+  padding: 10px;
+}
+
+.multi-slide img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.slider-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.slider-btn:hover {
+  background-color: #555;
+}
+```
+
+---
+
+## 🔥 Explicación clave
+1. **`ITEMS_VISIBLE = 3;`** → Define cuántos elementos se muestran a la vez.
+2. **`translateX(-${currentIndex * (100 / ITEMS_VISIBLE)}%)`** → Mueve las imágenes en bloques de 1/3 del ancho.
+3. **`if (currentIndex < images.length - ITEMS_VISIBLE)`** → Evita que el slider avance cuando ya no hay más imágenes disponibles.
+4. **Los botones (`◀` y `▶`)** permiten navegar **hacia adelante y atrás** en el carrusel.
+
+---
+
+## 📌 Preguntas para reflexionar y próximos retos
+1. **¿Cómo haríamos para que el slider sea *responsivo* y muestre *2 imágenes en móviles* en lugar de 3?**
+2. **¿Podemos hacer que el slider sea *infinito* y vuelva a empezar cuando llega al final?**
+3. **¿Cómo podríamos agregar *paginación con puntos* debajo del slider?**
+
+👉 **En futuras clases, exploraremos estas mejoras y aprenderemos nuevas técnicas avanzadas. 🚀**
+
+---
+
+✅ **Con esto terminamos la Clase 4. ¡Felicitaciones! 🎉**  
+Ahora puedes probar el código y responder las preguntas antes de continuar con la siguiente clase.
