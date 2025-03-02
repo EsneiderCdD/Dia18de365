@@ -196,3 +196,128 @@ export default function Class02_NavSlider() {
 ## 🔜 ¿Qué sigue?
 🔹 **Podemos agregar paginación (puntos de navegación) en la siguiente clase.**  
 🔹 **¿Quieres practicar algún cambio antes de seguir?**  
+
+
+
+
+
+
+
+
+
+# 📖 Clase 3: Slider con AutoPlay y Pausa al Pasar el Mouse
+
+## 📌 Objetivo
+En esta clase, hemos mejorado nuestro slider añadiendo la funcionalidad de **auto-reproducción** y la capacidad de **pausar** el cambio de imágenes cuando el usuario pasa el mouse por encima. Esta es una característica muy común en sliders modernos y mejora la experiencia de usuario.
+
+## 🛠 Tecnologías y conceptos clave
+- **useEffect & setInterval**: Para manejar la reproducción automática.
+- **Limpieza de efectos**: Para evitar intervalos innecesarios o errores.
+- **Eventos del mouse**: `onMouseEnter` y `onMouseLeave` para pausar y reanudar.
+- **Animación con CSS**: Movimiento fluido entre imágenes.
+
+---
+
+## 🏗 Estructura del Proyecto
+```
+📂 src
+ ├── 📂 components
+ │   ├── 📄 AutoPlaySlider.jsx
+ ├── 📂 styles
+ │   ├── 📄 AutoPlaySlider.css
+```
+
+---
+
+## 📜 Explicación del Código
+
+### 📌 **AutoPlay con useEffect y setInterval**
+```jsx
+useEffect(() => {
+  if (!isPaused) {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 3000); // Cambio cada 3 segundos
+
+    return () => clearInterval(interval); // Limpia el intervalo al desmontar o pausar
+  }
+}, [isPaused]);
+```
+📌 **¿Qué hace este código?**
+- Se ejecuta cada vez que `isPaused` cambia.
+- Si `isPaused` es `false`, inicia un `setInterval` que cambia de imagen cada 3 segundos.
+- Si `isPaused` es `true`, el intervalo no se ejecuta.
+- `clearInterval(interval)` se usa para limpiar el temporizador cuando el componente se desmonta o `isPaused` cambia.
+
+---
+
+### 📌 **Pausar el AutoPlay con eventos del mouse**
+```jsx
+<div
+  className="slider-container"
+  onMouseEnter={() => setIsPaused(true)}
+  onMouseLeave={() => setIsPaused(false)}
+>
+```
+📌 **¿Qué hace esto?**
+- Cuando el mouse entra (`onMouseEnter`), cambia `isPaused` a `true`, deteniendo el autoplay.
+- Cuando el mouse sale (`onMouseLeave`), cambia `isPaused` a `false`, reanudando el autoplay.
+
+---
+
+### 📌 **Animación del Slider con CSS**
+```jsx
+<div className="slider" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+```
+📌 **¿Cómo funciona?**
+- `translateX(-${currentIndex * 100}%)` mueve el slider a la izquierda en base al índice actual.
+- Esto crea un efecto de desplazamiento suave entre imágenes.
+
+---
+
+## 🎨 Código CSS para el slider
+```css
+.slider-container {
+  width: 800px;
+  height: 400px;
+  overflow: hidden;
+  margin: auto;
+  position: relative;
+  border-radius: 10px;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+```
+📌 **¿Qué logramos con esto?**
+- `overflow: hidden;` → Evita que se vean imágenes fuera del contenedor.
+- `display: flex;` → Alinea las imágenes en una fila.
+- `transition: transform 0.5s ease-in-out;` → Suaviza la animación.
+
+---
+
+## 🚀 Retos Adicionales
+✅ Agregar botones "Anterior" y "Siguiente".  
+✅ Incluir indicadores (puntos) que muestren la imagen actual.  
+✅ Hacer que la velocidad de autoplay sea configurable.  
+
+---
+
+## 📌 Conclusión
+Esta clase introdujo el **auto-reproducción** con `setInterval`, la **pausa con eventos del mouse**, y **efectos de transición suaves**. Con este conocimiento, podemos avanzar a sliders más avanzados con interactividad adicional. 🚀
+
+---
+
+¡Listo para la siguiente clase! 🎉
