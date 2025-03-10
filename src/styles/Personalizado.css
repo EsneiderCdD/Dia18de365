@@ -1,0 +1,62 @@
+.contenedor {
+    display: flex;
+    justify-content: center; /* Centrar el slider */
+    align-items: center;
+    overflow: hidden; /* Oculta el desbordamiento para que no haya scroll */
+    position: relative;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    margin: 20px auto;
+    background-color: #f4f4f4;
+    width: 500px; /* Ajusta según el tamaño deseado */
+    height: 400px; /* Mantiene la altura del contenedor */
+  }
+  
+  .deslizador {
+    display: flex;
+    width: 100%; /* Ocupa el ancho completo del contenedor */
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .diapositiva {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%; /* Cada imagen ocupa exactamente el ancho del contenedor */
+    height: 100%;
+  }
+  
+  .diapositiva img {
+    max-height: 100%; /* Mantiene la proporción de la imagen */
+    width: auto; /* Evita distorsión */
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  /* Botones de navegación */
+  .anterior, .siguiente {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+  }
+  
+  .anterior {
+    left: 10px;
+  }
+  
+  .siguiente {
+    right: 10px;
+  }
+  
+  .anterior:hover, .siguiente:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
