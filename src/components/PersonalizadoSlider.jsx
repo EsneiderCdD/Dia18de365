@@ -2,6 +2,8 @@ import { useState } from "react";
 import "../styles/PersonalizadoSlider.css";
 import Img1 from "../images/Img1.jpeg";
 import Img2 from "../images/Img2.jpeg";
+import Img3 from "../images/Img3.jpeg";
+import Img4 from "../images/Img4.jpeg";
 
 const diapositivas = [
   {
@@ -17,6 +19,11 @@ const diapositivas = [
     titulo: "Segunda Diapositiva",
     texto: "Ahora tenemos la imagen a la derecha y el texto a la izquierda.",
     posicion: "derecha",
+  },
+  {
+    id: 3,
+    imagenes: [Img2, Img3, Img4], // Tres imágenes juntas
+    tipo: "galeria", // Clave para identificar esta diapositiva
   },
 ];
 
@@ -39,7 +46,15 @@ export default function SliderPersonalizado() {
             key={diapositiva.id}
             className={`seccion ${index === indice ? "visible" : "oculto"}`}
           >
-            {diapositiva.posicion === "izquierda" ? (
+            {diapositiva.tipo === "galeria" ? (
+              <div className="contenedor-galeria">
+                {diapositiva.imagenes.map((img, idx) => (
+                  <div key={idx} className="contenedor-imagen-galeria">
+                    <img src={img} alt={`Imagen ${idx + 1}`} />
+                  </div>
+                ))}
+              </div>
+            ) : diapositiva.posicion === "izquierda" ? (
               <>
                 <div className="contenedor-imagen">
                   <img src={diapositiva.imagen} alt={`Imagen ${diapositiva.id}`} />

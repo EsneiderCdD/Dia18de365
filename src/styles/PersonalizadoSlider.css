@@ -66,6 +66,31 @@
     color: #555;
   }
   
+  /* Estilos para la diapositiva con tres imágenes */
+  .contenedor-galeria {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+  }
+  
+  .contenedor-imagen-galeria {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .contenedor-imagen-galeria img {
+    max-height: 90%;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
   .previo,
   .siguiente {
     position: absolute;
